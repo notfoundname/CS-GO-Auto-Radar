@@ -31,7 +31,7 @@
 #define TAR_MAX_LAYERS 5
 #define TAR_AO_SAMPLES 256
 
-std::string g_game_path = "D:/SteamLibrary/steamapps/common/Counter-Strike Global Offensive/csgo";
+std::string g_game_path = "D:/SteamLibrary/steamapps/common/Counter-Strike Source/cstrike";
 std::string g_mapfile_path = "sample_stuff/de_tavr_test";
 std::string g_mapname;
 std::string g_mapfile_name;
@@ -377,17 +377,17 @@ int app(int argc, const char** argv) {
 		}
 
 		// Try resolve spawn positions
-		glm::vec3* loc_spawnCT = g_vmf_file->calculateSpawnAVG_PMIN("info_player_counterterrorist");
-		glm::vec3* loc_spawnT = g_vmf_file->calculateSpawnAVG_PMIN("info_player_terrorist");
+		//glm::vec3* loc_spawnCT = g_vmf_file->calculateSpawnAVG_PMIN("info_player_counterterrorist");
+		//glm::vec3* loc_spawnT = g_vmf_file->calculateSpawnAVG_PMIN("info_player_terrorist");
 
-		if (loc_spawnCT != NULL) {
-			node_radar.Values.insert({ "CTSpawn_x", std::to_string(util::roundf(remap(loc_spawnCT->x, g_tar_config->m_view_origin.x, g_tar_config->m_view_origin.x + g_tar_config->m_render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
-			node_radar.Values.insert({ "CTSpawn_y", std::to_string(util::roundf(remap(loc_spawnCT->z, g_tar_config->m_view_origin.y, g_tar_config->m_view_origin.y - g_tar_config->m_render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
-		}
-		if (loc_spawnT != NULL) {
-			node_radar.Values.insert({ "TSpawn_x", std::to_string(util::roundf(remap(loc_spawnT->x, g_tar_config->m_view_origin.x, g_tar_config->m_view_origin.x + g_tar_config->m_render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
-			node_radar.Values.insert({ "TSpawn_y", std::to_string(util::roundf(remap(loc_spawnT->z, g_tar_config->m_view_origin.y, g_tar_config->m_view_origin.y - g_tar_config->m_render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
-		}
+		//if (loc_spawnCT != NULL) {
+		//	node_radar.Values.insert({ "CTSpawn_x", std::to_string(util::roundf(remap(loc_spawnCT->x, g_tar_config->m_view_origin.x, g_tar_config->m_view_origin.x + g_tar_config->m_render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
+		//	node_radar.Values.insert({ "CTSpawn_y", std::to_string(util::roundf(remap(loc_spawnCT->z, g_tar_config->m_view_origin.y, g_tar_config->m_view_origin.y - g_tar_config->m_render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
+		//}
+		//if (loc_spawnT != NULL) {
+		//	node_radar.Values.insert({ "TSpawn_x", std::to_string(util::roundf(remap(loc_spawnT->x, g_tar_config->m_view_origin.x, g_tar_config->m_view_origin.x + g_tar_config->m_render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
+		//	node_radar.Values.insert({ "TSpawn_y", std::to_string(util::roundf(remap(loc_spawnT->z, g_tar_config->m_view_origin.y, g_tar_config->m_view_origin.y - g_tar_config->m_render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
+		//}
 
 		int hostn = 1;
 		for (auto && hostage : g_vmf_file->get_entities_by_classname("info_hostage_spawn")) {
@@ -396,7 +396,7 @@ int app(int argc, const char** argv) {
 		}
 
 		std::ofstream out(filesys->create_output_filepath("resource/overviews/" + g_mapfile_name + ".txt", true).c_str());
-		out << "// TAVR - AUTO RADAR. v 2.5.0a\n";
+		out << "// TAVR - AUTO RADAR. v 2.5.0a editied by notfoundname\n";
 		node_radar.Serialize(out);
 		out.close();
 	}

@@ -111,20 +111,20 @@ std::string detect_csgo_bin(std::string steam_drive_letter = "c") {
 		// steam_path assumed to be correct from here.
 
 		// check steam apps folder
-		if (checkFileExist((steam_path + "steamapps/common/Counter-Strike Global Offensive/bin/hammer.exe").c_str()))
-			return steam_path + "steamapps/common/Counter-Strike Global Offensive/bin/";
+		if (checkFileExist((steam_path + "steamapps/common/Counter-Strike Source/bin/hammer.exe").c_str()))
+			return steam_path + "steamapps/common/Counter-Strike Source/bin/";
 
 		// check if library folder thingy exists
 		if (checkFileExist((steam_path + "steamapps/libraryfolders.vdf").c_str())) {
 			for (auto && folder : get_library_folders_from_vdf(steam_path + "steamapps/libraryfolders.vdf"))
-				if (checkFileExist((folder + "Counter-Strike Global Offensive/bin/hammer.exe").c_str()))
-					return sutil::ReplaceAll(folder, "\\\\", "/") + "Counter-Strike Global Offensive/bin/";
+				if (checkFileExist((folder + "Counter-Strike Source/bin/hammer.exe").c_str()))
+					return sutil::ReplaceAll(folder, "\\\\", "/") + "Counter-Strike Source/bin/";
 
-			throw std::exception(("1) [" + steam_path + "steamapps/common/Counter-Strike Global Offensive/bin/hammer.exe] not found\n2) libraryfolders.vdf search failed.").c_str());
+			throw std::exception(("1) [" + steam_path + "steamapps/common/Counter-Strike Source/bin/hammer.exe] not found\n2) libraryfolders.vdf search failed.").c_str());
 		}
 
 		// unable to find hammer using any methods.
-		throw std::exception(("1) [" + steam_path + "steamapps/common/Counter-Strike Global Offensive/bin/hammer.exe] not found\n2) libraryfolders.vdf not found.").c_str());
+		throw std::exception(("1) [" + steam_path + "steamapps/common/Counter-Strike Source/bin/hammer.exe] not found\n2) libraryfolders.vdf not found.").c_str());
 	}
 	catch (std::exception e) {
 		cc::error(); std::cout << "\nFailed to automatically detect /bin/ folder...\n\n";
@@ -171,7 +171,7 @@ int main(int argc, const char** argv) {
 		cc::info();  std::cout << "AutoRadar_installer.exe ";
 		cc::reset(); std::cout << "\"";
 		cc::info();  std::cout << "..."; 
-		cc::reset(); std::cout << "Counter-Strike Global Offensive/bin/\"\n";
+		cc::reset(); std::cout << "Counter-Strike Source/bin/\"\n";
 		exit();
 	};
 

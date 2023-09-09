@@ -82,7 +82,7 @@ std::string m_game_path;
 #endif
 #ifdef _DEBUG
 std::string m_mapfile_path = "sample_stuff/de_tavr_test";
-std::string m_game_path = "D:/SteamLibrary/steamapps/common/Counter-Strike Global Offensive/csgo";
+std::string m_game_path = "D:/SteamLibrary/steamapps/common/Counter-Strike Source/cstrike";
 #endif
 
 //derived strings
@@ -744,17 +744,17 @@ int app(int argc, const char** argv) {
 	node_radar.Values.insert({ "scale", std::to_string(render_ortho_scale / 1024.0f) });
 
 	// Try resolve spawn positions
-	glm::vec3* loc_spawnCT = vmf_main.calculateSpawnLocation(vmf::team::counter_terrorist);
-	glm::vec3* loc_spawnT = vmf_main.calculateSpawnLocation(vmf::team::terrorist);
+	//glm::vec3* loc_spawnCT = vmf_main.calculateSpawnLocation(vmf::team::counter_terrorist);
+	//glm::vec3* loc_spawnT = vmf_main.calculateSpawnLocation(vmf::team::terrorist);
 
-	if (loc_spawnCT != NULL) {
-		node_radar.Values.insert({ "CTSpawn_x", std::to_string(util::roundf(remap(loc_spawnCT->x, view_origin.x, view_origin.x + render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
-		node_radar.Values.insert({ "CTSpawn_y", std::to_string(util::roundf(remap(loc_spawnCT->y, view_origin.y, view_origin.y - render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
-	}
-	if (loc_spawnT != NULL) {
-		node_radar.Values.insert({ "TSpawn_x", std::to_string(util::roundf(remap(loc_spawnT->x, view_origin.x, view_origin.x + render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
-		node_radar.Values.insert({ "TSpawn_y", std::to_string(util::roundf(remap(loc_spawnT->y, view_origin.y, view_origin.y - render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
-	}
+	//if (loc_spawnCT != NULL) {
+	//	node_radar.Values.insert({ "CTSpawn_x", std::to_string(util::roundf(remap(loc_spawnCT->x, view_origin.x, view_origin.x + render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
+	//	node_radar.Values.insert({ "CTSpawn_y", std::to_string(util::roundf(remap(loc_spawnCT->y, view_origin.y, view_origin.y - render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
+	//}
+	//if (loc_spawnT != NULL) {
+	//	node_radar.Values.insert({ "TSpawn_x", std::to_string(util::roundf(remap(loc_spawnT->x, view_origin.x, view_origin.x + render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
+	//	node_radar.Values.insert({ "TSpawn_y", std::to_string(util::roundf(remap(loc_spawnT->y, view_origin.y, view_origin.y - render_ortho_scale, 0.0f, 1.0f), 0.01f)) });
+	//}
 
 	std::ofstream out(filesys->create_output_filepath("resource/overviews/" + m_mapfile_name + ".txt", true).c_str());
 	out << "// TAVR - AUTO RADAR. v 2.0.0\n";

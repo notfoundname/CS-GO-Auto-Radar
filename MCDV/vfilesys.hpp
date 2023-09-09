@@ -14,7 +14,7 @@ public:
 
 	// Paths
 	std::string dir_gamedir;  // Where the gameinfo.txt is (and where we should output to)
-	std::string dir_exedir;   // Counter-Strike Global Offensive directory
+	std::string dir_exedir;   // Counter-Strike Source directory
 	std::string dir_bin;      // exedir + /bin/ folder
 
 	std::vector<std::string> searchPaths; // List of paths to search for stuff (these are all absolute)
@@ -44,11 +44,11 @@ public:
 		std::cout << dir_upOne << "\n";
 
 		if (exedir != "") 
-			if(fs::checkFileExist((exedir + "/csgo.exe").c_str())) this->dir_exedir = exedir + "/";
+			if(fs::checkFileExist((exedir + "/hl2.exe").c_str())) this->dir_exedir = exedir + "/";
 			else throw std::exception("Specified exedir was incorrect");
 
-		else if (fs::checkFileExist((dir_upOne + "csgo.exe").c_str())) this->dir_exedir = dir_upOne;
-		else throw std::exception("Can't find csgo.exe");
+		else if (fs::checkFileExist((dir_upOne + "hl2.exe").c_str())) this->dir_exedir = dir_upOne;
+		else throw std::exception("Can't find hl2.exe");
 
 		// Set bindir
 		this->dir_bin = this->dir_exedir + "bin/";
@@ -65,15 +65,15 @@ public:
 
 		this->searchPaths.push_back(this->dir_gamedir);
 
-		// Look for pak01_dir.vpk in all search paths
+		// Look for cstrike_dir.vpk in all search paths
 		for (auto && sp : this->searchPaths) {
-			if (fs::checkFileExist((sp + "pak01_dir.vpk").c_str())) {
-				this->vpkIndex = new vpk::index(sp + "pak01_dir.vpk");
+			if (fs::checkFileExist((sp + "cstrike_dir.vpk").c_str())) {
+				this->vpkIndex = new vpk::index(sp + "cstrike_dir.vpk");
 				goto IL_FOUND;
 			}
 		}
 
-		std::cout << "Warning: could not find pak01_dir.vpk...\n";
+		std::cout << "Warning: could not find cstrike_dir.vpk...\n";
 
 	IL_FOUND:
 		std::cout << "Finished setting up filesystem.\n";
@@ -106,7 +106,7 @@ public:
 			vpk::vEntry* vEntry = this->vpkIndex->find(relpath);
 
 			if (vEntry != NULL) {
-				std::string pakDir = this->dir_exedir + "csgo/pak01_" + sutil::pad0(std::to_string(vEntry->entryInfo.ArchiveIndex), 3) + ".vpk";
+				std::string pakDir = this->dir_exedir + "cstrike/cstrike_pak_" + sutil::pad0(std::to_string(vEntry->entryInfo.ArchiveIndex), 3) + ".vpk";
 
 				std::ifstream pkHandle(pakDir, std::ios::in | std::ios::binary);
 
